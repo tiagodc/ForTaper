@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Afilamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-list>
+    <ion-card *ngFor="let m of models.modelsList; let i = index" [class]="classCard(i)">
+      <ion-card-header>
+        <b>{{m.author}} ({{m.year}})</b>
+      </ion-card-header>
+      <ion-card-content style="text-align:center;font-size:18px" [innerHTML]="m.model | safeHtml" (tap)="tapCard(i)">
+      </ion-card-content>
+
+      <div [hidden]="i !== models.active">
+        <!--div style="border-top:1px solid black;width:80%;margin:10px 0 0 10%"></div-->
+
+        <ion-item *ngFor="let cf of m.coef">
+          <ion-label [innerHTML]="cf.beta | safeHtml">{{cf.beta}}</ion-label>
+          <ion-input type="number" step="0.0000001" [(ngModel)]="cf.val"></ion-input>
+        </ion-item>
+      </div>
+
+    </ion-card>
+  </ion-list>
+
+</ion-content>
