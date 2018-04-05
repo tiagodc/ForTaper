@@ -6,7 +6,7 @@ export class ModelsProvider {
 
   defDap = 30;
   defHt = 25;
-  step: number = 0.5;
+  step: number = 1;
   active: number = -1;
   
   dwL: number = 30;
@@ -14,7 +14,21 @@ export class ModelsProvider {
   hwL: number = 22;
   hwK: number = 3;
 
-  weibull(a,c){var b=1-Math.random();return a*Math.pow(-Math.log(b),1/c)};
+  plantio = {
+		spx: 1.5 * 100,
+		spy: 1.5 * 100,
+		nx: 4,
+    ny: 4,
+    skip: 0.05,
+		max(x: boolean){
+			return ( x ? (this.spx * this.nx) : (this.spy * this.ny) ); 
+		}
+	}
+
+  setDH(d, h){
+    this.defDap = d;
+    this.defHt = h;
+  };
 
   dWeibull(x, k, l){
     let den = (k/l) * Math.pow(x/l, k-1) * Math.exp(-Math.pow(x/l, k));
@@ -31,19 +45,17 @@ export class ModelsProvider {
         {beta: katex.renderToString("\\beta_1 ="), val: 12.195512},
         {beta: katex.renderToString("\\beta_2 ="), val: 12.292301}
       ],
-      dap: this.defDap,
-      h: this.defHt,
-      step: this.step,
+      parent: this,
       function(){
         let b0 = this.coef[0].val;
         let b1 = this.coef[1].val;
         let b2 = this.coef[2].val;
 
         let di: Array<Object> = [];
-        for(let i = 0.01; i <= this.h; i += this.step){
-          let z = (this.h - i) / (this.h - 1.3);
+        for(let i = 0.01; i <= this.parent.defHt; i += this.parent.step){
+          let z = (this.parent.defHt - i) / (this.parent.defHt - 1.3);
           let y = b0 * Math.log((b1 + z) / b2);
-          let dt = y * this.dap;
+          let dt = y * this.parent.defDap;
           dt = (dt > 0 ? dt : 0);
           di.push({x: dt, y: i});
         }
@@ -60,18 +72,16 @@ export class ModelsProvider {
         {beta: katex.renderToString("\\beta_1 ="), val: -2.660052},
         {beta: katex.renderToString("\\beta_2 ="), val: 1.308719}
       ],
-      dap: this.defDap,
-      h: this.defHt,
-      step: this.step,
+      parent: this,
       function(){
         let b0 = this.coef[0].val;
         let b1 = this.coef[1].val;
         let b2 = this.coef[2].val;
 
         let di: Array<Object> = [];
-        for(let i = 0.01; i <= this.h; i += this.step){
-          let ysq = b0 + b1*(i/this.h) + b2*Math.pow(i/this.h,2);
-          let dt = Math.sqrt(ysq) * this.dap;
+        for(let i = 0.01; i <= this.parent.defHt; i += this.parent.step){
+          let ysq = b0 + b1*(i/this.parent.defHt) + b2*Math.pow(i/this.parent.defHt,2);
+          let dt = Math.sqrt(ysq) * this.parent.defDap;
           dt = (dt > 0 ? dt : 0); 
           di.push({x: dt, y: i});
         }
@@ -84,15 +94,6 @@ export class ModelsProvider {
 
   dRange;
   hRange;
-  fillRandom(){
-    let i = 0;     
-    while(i < 500){
-      this.dRange.push( this.weibull(this.dwL, this.dwK) );
-      this.hRange.push( this.weibull(this.hwL, this.hwK) );
-      i++;
-    }
-  };
-
   fillSorted(){
     this.dRange = [];
     this.hRange = []; 
