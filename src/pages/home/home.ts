@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ModelsProvider } from "../../providers/models/models";
-// import { NgModel } from '@angular/forms';
-//import * as katex from 'katex';
+import { WebsiteProvider } from '../../providers/website/website'
 
 @Component({
   selector: 'page-home',
@@ -10,7 +9,7 @@ import { ModelsProvider } from "../../providers/models/models";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public models: ModelsProvider) {
+  constructor(public navCtrl: NavController, public models: ModelsProvider, public web: WebsiteProvider) {
   }
 
   tapCard(ind){

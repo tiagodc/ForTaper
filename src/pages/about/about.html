@@ -1,50 +1,66 @@
 <ion-header>
   <ion-navbar>
+    <a class="titleicon">
+      <img src="assets/imgs/forlidar_noalpha.png" width="50px" height="50px" (tap)="web.navigate()" />
+    </a>
+
     <ion-title>
-      Weibull
+      Frequências
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding-horizontal>
-  <ion-grid style="height:100%" text-center no-padding no-margin>
+  <ion-grid style="height:20%" text-center no-padding no-margin>
     <!-- DAP -->
-    <ion-row  style="height:20%">
+    <ion-row>
       <ion-col>
-          <ion-label [innerHTML]="greekVars.kappa | safeHtml"></ion-label>
-          <ion-range no-margin no-padding color="green" min="0" max="12" step="0.01" [(ngModel)]="models.dwK" (ngModelChange)="redistribute()" pin="true">
-              <ion-icon range-left name="md-trending-down"></ion-icon> 
+          <ion-label class="greekLabel" [innerHTML]="greekVars.kappa | safeHtml"></ion-label>
+          <ion-range color="green" min="0" [max]="intPars.maxD.K" [(ngModel)]="intPars.dwK" (ngModelChange)="redistribute()">
+              <ion-badge range-left color="green">{{models.dwK}}</ion-badge>
           </ion-range>
       </ion-col>
 
       <ion-col>
-          <ion-label [innerHTML]="greekVars.lambda | safeHtml"></ion-label>
-          <ion-range color="green" min="0" max="100" step="0.01" [(ngModel)]="models.dwL"  (ngModelChange)="redistribute()" pin="true">
-              <ion-icon range-right name="md-trending-up"></ion-icon>
+          <ion-label class="greekLabel" [innerHTML]="greekVars.lambda | safeHtml"></ion-label>
+          <ion-range color="green" min="0" [max]="intPars.maxD.L" [(ngModel)]="intPars.dwL"  (ngModelChange)="redistribute()">
+              <ion-badge range-right color="green">{{models.dwL}}</ion-badge>
           </ion-range>
       </ion-col>
-    </ion-row>
 
-    <!-- graph -->
-    <ion-row style="height:65%">
-      <ion-col>
-        <div id="myChart" style="width:100%;height:85%"></div>
-      </ion-col>
+      <!-- Ht -->
+      <ion-col *ngIf="rotated">
+        <ion-label class="greekLabel" [innerHTML]="greekVars.kappa | safeHtml"></ion-label>
+        <ion-range color="orange" min="0" [max]="intPars.maxH.K" [(ngModel)]="intPars.hwK" (ngModelChange)="redistribute()">
+          <ion-badge range-left color="orange">{{models.hwK}}</ion-badge>
+        </ion-range>
+    </ion-col>
+
+    <ion-col *ngIf="rotated">
+      <ion-label class="greekLabel" [innerHTML]="greekVars.lambda | safeHtml"></ion-label>
+        <ion-range color="orange" min="0" [max]="intPars.maxH.L" [(ngModel)]="intPars.hwL"  (ngModelChange)="redistribute()">
+            <ion-badge range-right color="orange">{{models.hwL}}</ion-badge>
+        </ion-range>
+    </ion-col>
     </ion-row>
+    </ion-grid>
+    
+    <div *ngIf="rotated" style="height:60px"></div>
+
+    <div id="myChart" style="width:100%;height:63%"></div>
 
     <!-- Ht -->
-    <ion-row  style="height:15%;" margin-top>
+    <ion-grid style="height:10%;" text-center no-padding no-margin *ngIf="!rotated">
+    <ion-row>
         <ion-col>
-            <!--ion-label [innerHTML]="greekVars.kappa | safeHtml"></ion-label-->
-            <ion-range color="orange" min="0" max="12" step="0.01" [(ngModel)]="models.hwK" (ngModelChange)="redistribute()" pin="true">
-              <ion-icon range-left name="md-trending-down"></ion-icon>              
+            <ion-range color="orange" min="0" [max]="intPars.maxH.K" [(ngModel)]="intPars.hwK" (ngModelChange)="redistribute()">
+              <ion-badge range-left color="orange">{{models.hwK}}</ion-badge>
             </ion-range>
         </ion-col>
   
         <ion-col>
-            <!--ion-label [innerHTML]="greekVars.lambda | safeHtml"></ion-label-->
-            <ion-range color="orange" min="0" max="50" step="0.01" [(ngModel)]="models.hwL"  (ngModelChange)="redistribute()" pin="true">
-                <ion-icon range-right name="md-trending-up"></ion-icon>
+            <ion-range color="orange" min="0" [max]="intPars.maxH.L" [(ngModel)]="intPars.hwL"  (ngModelChange)="redistribute()">
+                <ion-badge range-right color="orange">{{models.hwL}}</ion-badge>
             </ion-range>
         </ion-col>
       </ion-row>

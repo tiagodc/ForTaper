@@ -7,12 +7,16 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ModalConfigPage } from '../pages/modal-config/modal-config'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ModelsProvider } from '../providers/models/models';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { InAppBrowser } from '@ionic-native/in-app-browser'
 
+import { ModelsProvider } from '../providers/models/models';
 import { PipesModule } from '../pipes/pipes.module';
+import { WebsiteProvider } from '../providers/website/website';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,8 @@ import { PipesModule } from '../pipes/pipes.module';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ModalConfigPage
   ],
   imports: [
     BrowserModule,
@@ -33,13 +38,17 @@ import { PipesModule } from '../pipes/pipes.module';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ModalConfigPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    ScreenOrientation,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ModelsProvider
+    ModelsProvider,
+    WebsiteProvider
   ]
 })
 export class AppModule {}

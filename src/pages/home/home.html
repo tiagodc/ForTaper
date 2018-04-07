@@ -1,5 +1,9 @@
 <ion-header>
   <ion-navbar>
+    <a class="titleicon">
+      <img src="assets/imgs/forlidar_noalpha.png" width="50px" height="50px" (tap)="web.navigate()" />
+    </a>
+
     <ion-title>Afilamento</ion-title>
   </ion-navbar>
 </ion-header>
@@ -7,18 +11,18 @@
 <ion-content padding>
   
   <ion-list>
-    <ion-card *ngFor="let m of models.modelsList; let i = index" [class]="classCard(i)">
-      <ion-card-header>
+    <ion-card style="margin-bottom:15px" *ngFor="let m of models.modelsList; let i = index" [class]="classCard(i)">
+      <ion-card-header  (tap)="tapCard(i)">
         <b>{{m.author}} ({{m.year}})</b>
       </ion-card-header>
-      <ion-card-content style="text-align:center;font-size:18px" [innerHTML]="m.model | safeHtml" (tap)="tapCard(i)">
+      <ion-card-content style="text-align:center;font-size:12px" [innerHTML]="m.model | safeHtml" (tap)="tapCard(i)">
       </ion-card-content>
 
       <div [hidden]="i !== models.active">
         <!--div style="border-top:1px solid black;width:80%;margin:10px 0 0 10%"></div-->
 
         <ion-item *ngFor="let cf of m.coef">
-          <ion-label [innerHTML]="cf.beta | safeHtml">{{cf.beta}}</ion-label>
+          <ion-label [innerHTML]="cf.beta | safeHtml"></ion-label>
           <ion-input type="number" step="0.0000001" [(ngModel)]="cf.val"></ion-input>
         </ion-item>
       </div>
