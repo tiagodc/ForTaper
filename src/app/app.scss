@@ -46,4 +46,15 @@ ion-title{
     left: 1px;
     bottom: 0;
     text-align:left;
+    background-color: transparent;
+}
+
+.titlebutton {
+    position: absolute;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    right: 4px;
 }
