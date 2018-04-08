@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController, PopoverController } from 'ionic-angular';
 import { ModelsProvider } from "../../providers/models/models";
 import * as katex from 'katex';
 import * as _ from 'underscore';
+import { simulatorHelp } from '../help/help';
 
 @Component({
   templateUrl: 'modal-config.html'
 })
 export class ModalConfigPage {
+
+  showHelp(ev: UIEvent) {
+    let popover = this.popOver.create(simulatorHelp);
+
+    popover.present({
+      ev: ev
+    });
+  }
 
   x: number;
   y: number;
@@ -54,7 +63,7 @@ export class ModalConfigPage {
     }
   }
 
-  constructor(public viewCtrl: ViewController, params: NavParams, public models: ModelsProvider) {
+  constructor(public viewCtrl: ViewController, params: NavParams, public models: ModelsProvider, public popOver: PopoverController) {
     this.getDims();
   }
 

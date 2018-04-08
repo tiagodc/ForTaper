@@ -5,3 +5,13 @@ page-modal-config {
 .range-md.range-has-pin {
     padding-top: 0;
 }
+
+.exitModal {
+    position: absolute;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    left: 4px;
+}

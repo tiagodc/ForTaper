@@ -1,12 +1,20 @@
 <ion-header>
   <ion-navbar>
-    <a class="titleicon">
-      <img src="assets/imgs/forlidar_noalpha.png" width="50px" height="50px" (tap)="web.navigate()" />
-    </a>
+    <ion-buttons left>
+      <button ion-button icon-only (tap)="web.navigate()">
+        <img src="assets/imgs/forlidar_noalpha.png" width="45px" height="45px" />
+      </button>
+    </ion-buttons>
 
-    <ion-title>
+    <ion-title text-center>
       Frequências
     </ion-title>
+
+    <ion-buttons right>
+      <button ion-button icon-only (tap)="showHelp()">
+        <ion-icon name="more"></ion-icon>        
+      </button>
+    </ion-buttons>  
   </ion-navbar>
 </ion-header>
 

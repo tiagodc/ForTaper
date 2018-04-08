@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { ModelsProvider } from "../../providers/models/models";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { WebsiteProvider } from '../../providers/website/website'
-
+import { distributionHelp } from '../../pages/help/help';
 
 import * as Plotly from '../../assets/plotly-latest.min.js'
 import * as katex from 'katex';
@@ -13,8 +13,16 @@ import * as katex from 'katex';
   templateUrl: 'about.html'
 })
 export class AboutPage {
-  title;
-  constructor(public navCtrl: NavController, public models: ModelsProvider, private screenOrientation: ScreenOrientation, public web: WebsiteProvider) {
+
+  showHelp(ev: UIEvent) {
+    let popover = this.popOver.create(distributionHelp);
+
+    popover.present({
+      ev: ev
+    });
+  }
+
+  constructor(public navCtrl: NavController, public models: ModelsProvider, private screenOrientation: ScreenOrientation, public web: WebsiteProvider, public popOver: PopoverController) {
     
     this.screenOrientation.onChange().subscribe( () => {
       let pos = /landscape/i.test(this.screenOrientation.type);

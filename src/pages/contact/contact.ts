@@ -280,25 +280,25 @@ export class ContactPage {
 	viewVolume;
 	writeAssortments(single: boolean){
 			
-		let c1 = 'Vol_{\\space d \\space \\lt \\space' + this.models.plantio.dClasses[0] + '\\space cm} = ' + this.viewVolumes.sort[0] + '\\%';
+		let c1 = 'V_{ol\\space d \\space \\lt \\space' + this.models.plantio.dClasses[0] + '\\space cm} = ' + this.viewVolumes.sort[0] + '\\%';
 
 		c1 = katex.renderToString(c1);
 
-		let c2 = 'Vol_{\\space '+ this.models.plantio.dClasses[0] +'\\space \\leq \\space d \\space \\lt \\space'+ this.models.plantio.dClasses[1] +'\\space cm} = ' + this.viewVolumes.sort[1] + '\\%';
+		let c2 = 'V_{ol\\space '+ this.models.plantio.dClasses[0] +'\\space \\leq \\space d \\space \\lt \\space'+ this.models.plantio.dClasses[1] +'\\space cm} = ' + this.viewVolumes.sort[1] + '\\%';
 
 		c2 = katex.renderToString(c2);
 
-		let c3 = 'Vol_{\\space '+ this.models.plantio.dClasses[1] +'\\space \\leq \\space d \\space \\lt \\space'+ this.models.plantio.dClasses[2] +'\\space cm} = ' + this.viewVolumes.sort[2] + '\\%';
+		let c3 = 'V_{ol\\space '+ this.models.plantio.dClasses[1] +'\\space \\leq \\space d \\space \\lt \\space'+ this.models.plantio.dClasses[2] +'\\space cm} = ' + this.viewVolumes.sort[2] + '\\%';
 
 		c3 = katex.renderToString(c3);
 
-		let c4 = 'Vol_{\\space d \\space \\geq \\space'+ this.models.plantio.dClasses[2] +'\\space cm} = ' + this.viewVolumes.sort[3] + '\\%';
+		let c4 = 'V_{ol\\space d \\space \\geq \\space'+ this.models.plantio.dClasses[2] +'\\space cm} = ' + this.viewVolumes.sort[3] + '\\%';
 
 		c4 = katex.renderToString(c4);
 		
 		this.viewAssortments = [c1, c2, c3, c4];
 
-		let vol = 'Vol_{total} = ' + this.viewVolumes.total;
+		let vol = 'V_{oltotal} = ' + this.viewVolumes.total;
 		vol += single ? '\\space m^3' : ' ± ' + this.viewVolumes.ci + '\\space m^3/ha';
 
 		vol = katex.renderToString(vol);

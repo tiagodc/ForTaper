@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { ModelsProvider } from "../../providers/models/models";
-import { WebsiteProvider } from '../../providers/website/website'
+import { WebsiteProvider } from '../../providers/website/website';
+import { modelsHelp } from '../../pages/help/help';
 
 @Component({
   selector: 'page-home',
@@ -9,7 +10,15 @@ import { WebsiteProvider } from '../../providers/website/website'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public models: ModelsProvider, public web: WebsiteProvider) {
+  constructor(public navCtrl: NavController, public models: ModelsProvider, public web: WebsiteProvider, public popOver: PopoverController) {
+  }
+
+  showHelp(ev: UIEvent) {
+    let popover = this.popOver.create(modelsHelp);
+
+    popover.present({
+      ev: ev
+    });
   }
 
   tapCard(ind){

@@ -6,13 +6,19 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Configurações</ion-title>
-
-    <ion-buttons end style="margin-top:4px;margin-right:5px">
+    <ion-buttons left>
       <button ion-button icon-only (tap)="dismiss()">
-        <ion-icon style="font-size:25px" name="close"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
+
+    <ion-title text-center>Configurações</ion-title>
+
+    <ion-buttons right>
+      <button ion-button icon-only (tap)="showHelp()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>  
   </ion-navbar>
 </ion-header>
 

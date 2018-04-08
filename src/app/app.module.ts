@@ -7,7 +7,8 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { ModalConfigPage } from '../pages/modal-config/modal-config'
+import { ModalConfigPage } from '../pages/modal-config/modal-config';
+import { modelsHelp, distributionHelp, simulatorHelp } from '../pages/help/help';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +26,10 @@ import { WebsiteProvider } from '../providers/website/website';
     ContactPage,
     HomePage,
     TabsPage,
-    ModalConfigPage
+    ModalConfigPage,
+    modelsHelp,
+    distributionHelp,
+    simulatorHelp
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,10 @@ import { WebsiteProvider } from '../providers/website/website';
     ContactPage,
     HomePage,
     TabsPage,
-    ModalConfigPage
+    ModalConfigPage,
+    modelsHelp,
+    distributionHelp,
+    simulatorHelp
   ],
   providers: [
     StatusBar,
