@@ -10,4 +10,4 @@ zipalign.exe -v 4 %file% %outvar%
 
 apksigner verify %outvar%
 
-del %file%
+del /Q /F %file%

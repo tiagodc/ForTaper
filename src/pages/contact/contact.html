@@ -20,6 +20,10 @@
 
 <ion-content>
 
+  <ion-fab left top>
+    <button ion-fab mini color="primary" (tap)="makeFile()"><ion-icon name="share"></ion-icon></button>
+  </ion-fab>
+
   <div [hidden]="waitForPlot" id="myDiv" style="width:100%;height:70%"></div>
 
   <div [hidden]="!waitForPlot" class="spinnerContainer">

@@ -5,6 +5,8 @@ import { ModalConfigPage } from '../../pages/modal-config/modal-config';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { WebsiteProvider } from '../../providers/website/website'
 
+import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import * as Plotly from '../../assets/plotly-latest.min.js';
 import {jStat} from 'jStat';
@@ -16,7 +18,7 @@ import * as katex from 'katex';
 })
 export class ContactPage {
 
-  constructor(public navCtrl: NavController, public models: ModelsProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public modalCtrl: ModalController, private screenOrientation: ScreenOrientation, public web: WebsiteProvider) {
+  constructor(public navCtrl: NavController, public models: ModelsProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public modalCtrl: ModalController, private screenOrientation: ScreenOrientation, public web: WebsiteProvider, private file: File, private social: SocialSharing) {
 
 	this.screenOrientation.onChange().subscribe( () =>{
 		setTimeout(() => {
@@ -75,7 +77,7 @@ export class ContactPage {
 			aspectratio: { x: 1, y: 1, z: 1.2},
 			xaxis: {range: [], autorange: true },
 			yaxis: {range: [], autorange: true },
-			zaxis: {range: [] },
+			zaxis: {range: [], autorange: true },
 		},
 		margin: { l: 0, r: 0, b: 25, t: 0 },
 		showlegend: false
@@ -125,29 +127,30 @@ export class ContactPage {
 		this.volumes = [];
 		let classified = [0,0,0,0];
 
-		let zpan = this.models.hRange.map(x => x.den);
-		let zind = zpan.indexOf(Math.max(...zpan));
-		let zval = this.models.hRange.map(x => x.qtl)[zind];
+		// let zpan = this.models.hRange.map(x => x.den);
+		// let zind = zpan.indexOf(Math.max(...zpan));
+		// let zval = this.models.hRange.map(x => x.qtl)[zind];
 
 		if(single){
 			this.layout.scene.xaxis.range = [-100, 100];
 			this.layout.scene.yaxis.range = [-100, 100];
+			// this.layout.scene.zaxis.range = [0, zval];
 
 			this.layout.scene.xaxis.autorange = false;
 			this.layout.scene.yaxis.autorange = false;
+			// this.layout.scene.zaxis.autorange = false;
 
-			this.layout.scene.zaxis.range = [0, zval];
 		}else{
 			// let xpan = this.models.plantio.max(true);
 			// let ypan = this.models.plantio.max(false);
 
 			delete this.layout.scene.xaxis.range;
 			delete this.layout.scene.yaxis.range;
+			// delete this.layout.scene.zaxis.range;
 
 			this.layout.scene.xaxis.autorange = true;
 			this.layout.scene.yaxis.autorange = true;
-
-			this.layout.scene.zaxis.range = [0, zval];
+			// this.layout.scene.zaxis.autorange = true;
 		}
 	
 		let nx = 0;
@@ -323,6 +326,7 @@ export class ContactPage {
 		setTimeout(() =>{
 			this.plot3d(this.models.plantio.singleTree);
 			this.writeAssortments(this.models.plantio.singleTree);
+			console.log(this.plotSet);
 		}, 200);
 	}
 
@@ -347,5 +351,21 @@ export class ContactPage {
 
 		this.renderPlot();
 	}
+
+	makeFile(){
+	
+	  let cloudString: string = '';
+	  for(let i = 0; i < this.plotSet.length; ++i){
+		  let temp = this.plotSet[i];
+		  for(let j = 0; j < temp.x.length; ++j){
+			cloudString += (temp.x[j]/100) + ' ' + (temp.y[j]/100) + ' ' + temp.z[j] + "\n";
+		  }
+	  }
+
+	  this.file.writeFile(this.file.dataDirectory, 'pcd.xyz', cloudString, {replace:true}).then(x => {		
+		this.social.share('nuvem de pontos', 'parcela.xyz', this.file.dataDirectory + 'pcd.xyz').then(x => console.log('cool')).catch(err => console.log('not cool...'))
+	  })
+	}
+
 
 }

@@ -11,6 +11,15 @@ import { Component } from '@angular/core';
     
     <ion-card-content>
       Selecione um modelo de afilamento de tronco dentre os disponíveis. O modelo selecionado será utilizado pelo simulador para gerar árvores aleatórias, nas quais você poderá observar o formato e crescimento do fuste. Você pode alterar os parâmetros do modelo selecionado ou apenas utilizar os recomendados.
+
+      <br><br>
+
+      <b>Fontes</b>:
+      <ion-list text-wrap>
+          <ion-item>Thomas CE, Parresol BR (1991) Simple, flexible, trigonometric taper equations. Can. J. For. Res. 21</ion-item>
+          <ion-item>Silva F, Corte APD, Sanquetta CR (2011) Equações de afilamento para descrever o volume total do fuste de <span style="font-style:italic">Pinus caribaea</span> var. hondurensis na região do Triângulo Mineiro. Sci. For. 39(91)</ion-item>
+          <ion-item>Nunes MH, Görgens EB (2016) Artificial Intelligence Procedures for Tree Taper Estimation within a Complex Vegetation Mosaic in Brazil. PLoS ONE 11(5)</ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
   `,
@@ -46,7 +55,7 @@ export class distributionHelp {}
     </ion-card-header>
     
     <ion-card-content>
-      Sua parcela foi gerada! A forma do fuste e crescimento das árvores foram determinados pelo modelo escolhido na aba <b>Taper</b>, e suas dimensões foram determinadas por valores aleatórios gerados a partir das distribuições Weibull com os parâmetros escolhidos por você na aba <b>Distribuição</b>.
+      Sua parcela foi gerada! A forma do fuste e crescimento das árvores foram determinados pelo modelo escolhido na aba <b>Taper</b>, e suas dimensões foram determinadas por valores aleatórios gerados a partir das distribuições Weibull com os parâmetros escolhidos por você na aba <b>Distribuição</b>. Caso queira salvar ou compartilhar a nuvem de pontos da parcela (formato .xyz), clique no botão <b><ion-icon name="share"></ion-icon></b>.
 
       <br><br>
 

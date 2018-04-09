@@ -13,7 +13,9 @@ import { modelsHelp, distributionHelp, simulatorHelp } from '../pages/help/help'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { InAppBrowser } from '@ionic-native/in-app-browser'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { ModelsProvider } from '../providers/models/models';
 import { PipesModule } from '../pipes/pipes.module';
@@ -53,6 +55,8 @@ import { WebsiteProvider } from '../providers/website/website';
     SplashScreen,
     ScreenOrientation,
     InAppBrowser,
+    File,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ModelsProvider,
     WebsiteProvider

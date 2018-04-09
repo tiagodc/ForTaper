@@ -17,7 +17,6 @@
 </ion-header>
 
 <ion-content padding>
-  
   <ion-list>
     <ion-card style="margin-bottom:15px" *ngFor="let m of models.modelsList; let i = index" [class]="classCard(i)">
       <ion-card-header  (tap)="tapCard(i)">
